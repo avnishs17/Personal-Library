@@ -16,16 +16,12 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-
-
-
-
 @app.route('/')
 def home():
     all_books=db.session.query(Book).all()
     return render_template('index.html',books=all_books)
 
-
+# add new book 
 @app.route("/add",methods=["GET","POST"])
 def add():
     if request.method=="POST":
@@ -39,6 +35,7 @@ def add():
         return  redirect(url_for('home'))
     return render_template('add.html')
 
+#edit rating
 @app.route('/edit',methods=["GET","POST"])
 def edit():
     if request.method=="POST":
@@ -51,11 +48,10 @@ def edit():
     book_selected=Book.query.get(book_id)
     return render_template("edit_rating.html",book=book_selected)
 
+#delte a book
 @app.route("/delete")
 def delete():
     book_id = request.args.get('id')
-
-    # DELETE A RECORD BY ID
     book_to_delete = Book.query.get(book_id)
     db.session.delete(book_to_delete)
     db.session.commit()
