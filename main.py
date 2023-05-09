@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///books.db'
-app.config['SQLALCHEMY_INSTANCE_PATH'] = 'D:/Python/library-database'
+app.config['SQLALCHEMY_INSTANCE_PATH'] = 'path to project folder'
 db = SQLAlchemy()
 
 class Book(db.Model):
